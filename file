@@ -1,0 +1,59 @@
+[17:42, 9/24/2024] ~🕊️: import requests
+import base64
+import json
+
+# Replace with your Google Gemini API endpoint and API key
+API_URL = "https://gemini.googleapis.com/v1/your_endpoint"  # Update the endpoint
+API_KEY = "AIzaSyAEwAZ3Vp7WzncXb9XToE29h7QpWGAVuhA"
+
+
+import base64
+import os
+
+def load_image(image_path):
+    # Check if the image path exists
+    import base64
+import os
+
+def load_image(image_path):
+    # Check if the image path exists and is a file
+    if not os.path.exists(image_path):
+        print(f"Warning: The file at {image_path} does not exist.")
+        return None  # Return None if the file is not found
+    
+    if not os.path.isfile(image_path):
+        print(f"Warning: The path {image_path} is not a valid file.")
+        return None  # Return None if the path is not a file
+    
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+
+def generate_text_from_image(image_path):
+    image_data = load_image(image_path)
+    
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "image": image_data
+    }
+
+    response = requests.post(API_URL, headers=headers, data=json.dumps(payload))
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}, {response.text}")
+        return None
+[17:42, 9/24/2024] ~🕊️: if _name_ == "_main_":
+    image_path = "path/to/your/image.jpg"  # Update with your image path
+    result = generate_text_from_image(image_path)
+    
+    if result:
+        print("Generated Text:")
+        print(result)  # Adjust based on API response structure
